@@ -1,0 +1,26 @@
+.mat-elevation-z8 {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    margin:0;
+  }
+
+ 
+  
+ 
+  .custom-table th.mat-header-cell, .custom-table td.mat-cell {
+    padding: 0;
+    margin:0;/* Reduce the padding as needed */
+  }
+  
+  .custom-inner-table th.mat-header-cell, .custom-inner-table td.mat-cell {
+    padding: 2px 4px; /* Reduce the padding for the inner table */
+  }
+
+  table {
+    border-spacing: 0; /* Ensure no additional spacing between cells */
+  }
+  
+  button {
+    margin: 8px 0; /* Adjust the button margin if needed */
+  }
+
+  
