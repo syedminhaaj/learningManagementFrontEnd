@@ -1,0 +1,21 @@
+<div>
+  <h2>{{ lessonData.lessonName }}</h2>
+  <div>{{ lessonData.lessonText }}</div>
+</div>
+<button (click)="previousLesson(lessonData.lessonId)" *ngIf="showPrevBtn()">
+  Previous lesson
+</button>
+
+<youtube-player
+  videoId="{{ lessonData.link }}"
+  suggestedQuality="highres"
+  [height]="250"
+  [width]="500"
+  [startSeconds]="4"
+  [endSeconds]="8"
+>
+</youtube-player>
+
+<button (click)="nextLesson(lessonData.lessonId)" *ngIf="showNextLessonBtn()">
+  next lesson
+</button>

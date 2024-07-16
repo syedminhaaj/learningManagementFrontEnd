@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
@@ -19,7 +19,13 @@ import { UserListComponent } from './user-list/user-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CoursePageComponent } from './course-page/course-page.component';
-
+import { LessonPageComponent } from './lesson-page/lesson-page.component';
+import { StoreModule } from '@ngrx/store';
+import {instructorReducer} from './store/instructor.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { InstructorEffects } from './store/instructor.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -27,7 +33,8 @@ import { CoursePageComponent } from './course-page/course-page.component';
     DashboardComponent,
     AddInstructorComponent,
     UserListComponent,
-    CoursePageComponent
+    CoursePageComponent,
+    LessonPageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,10 @@ import { CoursePageComponent } from './course-page/course-page.component';
     MatListModule,
     ReactiveFormsModule,
     FormsModule,
-    
+    StoreModule.forRoot({instructor:instructorReducer}),
+    EffectsModule.forRoot([InstructorEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    YouTubePlayerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -31,8 +31,13 @@ export class ApiService {
     return this.http.delete(url, { responseType: 'text' });
   }
 
-  getCourse(id:number){
+  getCourse(id:number): Observable<any>{
     const url = `${this.viewCourseUrl}?courseId=${id}`;
+    return this.http.get(url);
+  }
+
+  getLessonById(id:number): Observable<any>{
+    const url = `${this.baseUrl}/viewLesson?lessonId=${id}`;
     return this.http.get(url);
   }
 }
