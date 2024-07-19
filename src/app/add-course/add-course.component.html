@@ -1,0 +1,29 @@
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Input Text 1</mat-label>
+      <input matInput formControlName="input1" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Input Text 2</mat-label>
+      <input matInput formControlName="input2" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Select Dropdown</mat-label>
+      <mat-select formControlName="select">
+        <mat-option *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="warn" type="button" (click)="onClose()">
+        Close
+      </button>
+    </div>
+  </form>
+</div>

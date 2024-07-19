@@ -22,7 +22,7 @@ export class InstructorEffects {
     this.actions$.pipe(
       ofType(InstructorActions.loadData),
       mergeMap(() =>
-        this.http.get<any[]>(`${this.baseUrl}/getAll`).pipe(
+        this.apiService.getData().pipe(
           map((data) => InstructorActions.loadDataSuccess({ data })),
           catchError((error) =>
             of(InstructorActions.loadDataFailure({ error }))
@@ -54,6 +54,38 @@ export class InstructorEffects {
       switchMap(({ lessonId }) =>
         this.apiService.getLessonById(lessonId).pipe(
           map((lesson) => InstructorActions.loadLessonSuccess({ lesson })),
+          catchError((error) =>
+            of(InstructorActions.loadLessonFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // Another effect for loading all lessons
+  loadInstructorNameList$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InstructorActions.loadInstructorNameList),
+      mergeMap(() =>
+        this.apiService.getInstructorList().pipe(
+          map((instructorList) =>
+            InstructorActions.loadInstructorNameListSuccess({ instructorList })
+          ),
+          catchError((error) =>
+            of(InstructorActions.loadInstructorNameListFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  //Add course effect method
+  addCourseEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InstructorActions.addCourse),
+      switchMap(({ course }) =>
+        this.apiService.addCourse(course).pipe(
+          map((course) => InstructorActions.addCourseSuccess({ course })),
           catchError((error) =>
             of(InstructorActions.loadLessonFailure({ error }))
           )

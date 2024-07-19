@@ -1,20 +1,27 @@
 // reducer.ts
 import { createReducer, on } from '@ngrx/store';
-import { Course, Instructor, Lesson } from './common.models';
+import {
+  Course,
+  Instructor,
+  InstructorOnlyNameList,
+  Lesson,
+} from './common.models';
 import * as InstructorActions from './instructor.actions';
 
 export interface State {
   data: Instructor[];
   selectedCourse: Course | null;
-  selectedLesson:Lesson |null;
+  selectedLesson: Lesson | null;
+  instructorList: InstructorOnlyNameList[];
   error: any;
 }
 
 export const initialState: State = {
   data: [],
   selectedCourse: null,
-  selectedLesson:null,
-  error: null
+  selectedLesson: null,
+  instructorList: [],
+  error: null,
 };
 
 export const instructorReducer = createReducer(
@@ -22,11 +29,11 @@ export const instructorReducer = createReducer(
   on(InstructorActions.loadDataSuccess, (state, { data }) => ({
     ...state,
     data,
-    error: null
+    error: null,
   })),
   on(InstructorActions.loadDataFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   })),
   on(InstructorActions.loadCourseSuccess, (state, { course }) => ({
     ...state,
@@ -43,9 +50,30 @@ export const instructorReducer = createReducer(
     selectedLesson: lesson,
     error: null,
   })),
-  on(InstructorActions.loadCourseFailure, (state, { error }) => ({
+  on(InstructorActions.loadLessonFailure, (state, { error }) => ({
     ...state,
     selectedLesson: null,
+    error,
+  })),
+  on(
+    InstructorActions.loadInstructorNameListSuccess,
+    (state, { instructorList }) => ({
+      ...state,
+      instructorList: instructorList,
+      error: null,
+    })
+  ),
+  on(InstructorActions.loadInstructorNameListFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
+  on(InstructorActions.addCourseSuccess, (state, { course }) => ({
+    ...state,
+    selectedCourse: course,
+    error: null,
+  })),
+  on(InstructorActions.addCourseFailure, (state, { error }) => ({
+    ...state,
     error,
   }))
 );

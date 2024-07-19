@@ -1,5 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { Course, Instructor, Lesson } from './common.models';
+import {
+  Course,
+  Instructor,
+  InstructorOnlyNameList,
+  Lesson,
+} from './common.models';
 
 export const loadData = createAction('[Data] Load Data');
 export const loadDataSuccess = createAction(
@@ -38,5 +43,31 @@ export const loadLessonSuccess = createAction(
 
 export const loadLessonFailure = createAction(
   '[Course] Load Lesson Failure',
+  props<{ error: any }>()
+);
+
+export const loadInstructorNameList = createAction('[Course] Load Lesson');
+
+export const loadInstructorNameListSuccess = createAction(
+  '[Course] Load Lesson Success',
+  props<{ instructorList: InstructorOnlyNameList[] }>()
+);
+
+export const loadInstructorNameListFailure = createAction(
+  '[Course] Load Lesson Failure',
+  props<{ error: any }>()
+);
+export const addCourse = createAction(
+  '[Course] Load Course',
+  props<{ course: Course }>()
+);
+
+export const addCourseSuccess = createAction(
+  '[Course] Load Course Success',
+  props<{ course: Course }>()
+);
+
+export const addCourseFailure = createAction(
+  '[Course] Load Course Failure',
   props<{ error: any }>()
 );

@@ -17,15 +17,17 @@ import { AddInstructorComponent } from './add-instructor/add-instructor.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list/user-list.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CoursePageComponent } from './course-page/course-page.component';
 import { LessonPageComponent } from './lesson-page/lesson-page.component';
 import { StoreModule } from '@ngrx/store';
-import {instructorReducer} from './store/instructor.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { instructorReducer } from './store/instructor.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { InstructorEffects } from './store/instructor.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     AddInstructorComponent,
     UserListComponent,
     CoursePageComponent,
-    LessonPageComponent
+    LessonPageComponent,
+    AddCourseComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,17 +49,18 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatIconModule,
     MatSidenavModule,
     MatListModule,
     ReactiveFormsModule,
     FormsModule,
-    StoreModule.forRoot({instructor:instructorReducer}),
+    StoreModule.forRoot({ instructor: instructorReducer }),
     EffectsModule.forRoot([InstructorEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     YouTubePlayerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

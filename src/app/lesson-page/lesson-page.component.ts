@@ -62,9 +62,9 @@ export class LessonPageComponent implements OnInit {
     });
   }
   showPrevBtn() {
-    return this.lessonData.lessonId > this.prevLessonId;
+    return this.lessonData.lessonId >= this.prevLessonId;
   }
   showNextLessonBtn() {
-    return this.lessonData.lessonId < this.nextLessonId;
+    return this.lessonData.lessonId <= this.nextLessonId;
   }
 }
