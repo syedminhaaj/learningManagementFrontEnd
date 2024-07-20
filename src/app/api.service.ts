@@ -8,10 +8,10 @@ import { Course, Lesson } from './store/common.models';
 })
 export class ApiService {
   // based url for local
-  private baseUrl = 'http://localhost:8080';
+  //private baseUrl = 'http://localhost:8080';
 
   // baseURL from railcloud
-  // private baseUrl = 'https://learningmanagement-be-production.up.railway.app';
+  private baseUrl = 'https://learningmanagement-be-production.up.railway.app';
 
   private addInstructorUrl = 'http://localhost:8080/saveInstructor';
   private viewCourseUrl = 'http://localhost:8080/viewCourse';
@@ -38,7 +38,7 @@ export class ApiService {
   }
 
   getCourse(id: number): Observable<any> {
-    const url = `${this.viewCourseUrl}?courseId=${id}`;
+    const url = `${this.baseUrl}/viewCourse?courseId=${id}`;
     return this.http.get(url);
   }
 

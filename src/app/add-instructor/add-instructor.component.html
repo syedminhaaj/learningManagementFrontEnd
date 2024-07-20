@@ -21,7 +21,12 @@
       <input matInput formControlName="email" required /> </mat-form-field
     ><br />
 
-    <button mat-raised-button color="primary" type="submit">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="instructorForm.invalid"
+    >
       Add Instructor
     </button>
     <button
