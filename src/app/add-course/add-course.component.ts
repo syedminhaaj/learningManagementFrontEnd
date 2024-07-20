@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { Instructor, selectDropdown } from '../store/common.models';
@@ -18,12 +19,13 @@ export class AddCourseComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private store: Store<{ instructor: Instructor[] }>
   ) {
     this.form = this.fb.group({
-      input1: ['', Validators.required],
-      input2: ['', Validators.required],
-      select: ['', Validators.required],
+      courseName: ['', Validators.required],
+      courseDuration: ['', Validators.required],
+      instructorId: ['', Validators.required],
     });
   }
 
@@ -48,12 +50,18 @@ export class AddCourseComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       console.log('Form Submitted', this.form.value);
+      this.store.dispatch(
+        InstructorActions.addCourse({ course: this.form.value })
+      );
     } else {
       console.log('Form is invalid');
     }
   }
 
   onClose(): void {
+    //Dispatch common action to redict to dashboard page
+    //this.store.dispatch(InstructorActions.addInstructorSuccess());
     console.log('Form Closed');
+    this.router.navigate(['/users']);
   }
 }

@@ -48,4 +48,6 @@ export class CoursePageComponent implements OnInit {
       }
     });
   }
+
+  navigateToAddLesson() {}
 }

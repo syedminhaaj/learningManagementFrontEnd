@@ -1,11 +1,12 @@
 .form-container {
   max-width: 400px;
   margin: 0 auto;
+  float: left;
 }
 
 .form-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 20px;
 }
 
@@ -16,4 +17,7 @@
 
 .mat-raised-button {
   margin-right: 10px;
+}
+.saveBtn {
+  margin-right: 40px;
 }

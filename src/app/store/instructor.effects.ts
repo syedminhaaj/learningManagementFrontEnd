@@ -2,10 +2,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import * as InstructorActions from './instructor.actions';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class InstructorEffects {
@@ -15,7 +16,8 @@ export class InstructorEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) {}
 
   loadData$ = createEffect(() =>
@@ -87,10 +89,54 @@ export class InstructorEffects {
         this.apiService.addCourse(course).pipe(
           map((course) => InstructorActions.addCourseSuccess({ course })),
           catchError((error) =>
-            of(InstructorActions.loadLessonFailure({ error }))
+            of(InstructorActions.loadCourseFailure({ error }))
           )
         )
       )
     )
+  );
+
+  //Add lesson new effect method
+  addLessonEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InstructorActions.addLesson),
+      switchMap(({ lesson }) =>
+        this.apiService.addLesson(lesson).pipe(
+          map((course) => InstructorActions.addLessonSuccess({ lesson })),
+          catchError((error) =>
+            of(InstructorActions.addLessonFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+  //Add new instructor
+  addInstructorEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InstructorActions.addInstructor),
+      switchMap(({ instructor }) =>
+        this.apiService.saveInstructor(instructor).pipe(
+          map((instructor) =>
+            InstructorActions.addInstructorSuccess({ instructor })
+          ),
+          catchError((error) =>
+            of(InstructorActions.addInstructorFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+  //BELOW EFFECT METHOD WILL REDIRECT TO INSTRUCTOR LIST ONCE THE INSTRUCTOR IS ADDED
+  redirectAfterSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          InstructorActions.addInstructorSuccess,
+          InstructorActions.addCourseSuccess,
+          InstructorActions.addLessonSuccess
+        ),
+        tap(() => this.router.navigate(['/users']))
+      ),
+    { dispatch: false }
   );
 }

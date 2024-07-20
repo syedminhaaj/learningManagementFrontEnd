@@ -6,10 +6,11 @@ export interface Course {
 }
 
 export interface Lesson {
-  lessonId: number;
+  lessonId?: number;
   lessonText: string;
   lessonName: string;
   link: string;
+  courseId?: string;
 }
 
 export interface Instructor {

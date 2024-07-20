@@ -1,5 +1,13 @@
 <h3>{{ course.courseName }}</h3>
 <h4>It takes duration of {{ course.courseDuration }} days</h4>
+<button
+  mat-raised-button
+  color="primary"
+  (click)="navigateToAddLesson()"
+  [routerLink]="['/add-lesson', courseId]"
+>
+  Add New Lesson
+</button>
 <hr />
 <div class="mat-elevation-z8" *ngFor="let lesson of course.lessons">
   <div><b>Lesson Id : </b>{{ lesson.lessonId }}</div>

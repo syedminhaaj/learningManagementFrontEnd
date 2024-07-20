@@ -18,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list/user-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
 import { CoursePageComponent } from './course-page/course-page.component';
 import { LessonPageComponent } from './lesson-page/lesson-page.component';
 import { StoreModule } from '@ngrx/store';
@@ -28,6 +30,8 @@ import { InstructorEffects } from './store/instructor.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { AddCourseComponent } from './add-course/add-course.component';
+import { AddLessonPageComponent } from './add-lesson-page/add-lesson-page.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,8 @@ import { AddCourseComponent } from './add-course/add-course.component';
     CoursePageComponent,
     LessonPageComponent,
     AddCourseComponent,
+    AddLessonPageComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +52,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
     BrowserAnimationsModule,
     MatTableModule,
     MatToolbarModule,
+    MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -53,6 +60,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot({ instructor: instructorReducer }),

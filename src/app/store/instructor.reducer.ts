@@ -13,6 +13,7 @@ export interface State {
   selectedCourse: Course | null;
   selectedLesson: Lesson | null;
   instructorList: InstructorOnlyNameList[];
+  Instructor: Instructor | null;
   error: any;
 }
 
@@ -21,6 +22,7 @@ export const initialState: State = {
   selectedCourse: null,
   selectedLesson: null,
   instructorList: [],
+  Instructor: null,
   error: null,
 };
 
@@ -73,6 +75,24 @@ export const instructorReducer = createReducer(
     error: null,
   })),
   on(InstructorActions.addCourseFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
+  on(InstructorActions.addInstructorSuccess, (state, { instructor }) => ({
+    ...state,
+    instructor,
+    error: null,
+  })),
+  on(InstructorActions.addInstructorFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
+  on(InstructorActions.addLessonSuccess, (state, { lesson }) => ({
+    ...state,
+    lesson,
+    error: null,
+  })),
+  on(InstructorActions.addLessonFailure, (state, { error }) => ({
     ...state,
     error,
   }))

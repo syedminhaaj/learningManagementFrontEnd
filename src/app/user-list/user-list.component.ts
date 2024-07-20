@@ -9,6 +9,8 @@ import { map } from 'rxjs/operators';
 import * as InstructorActions from '../store/instructor.actions';
 import { selectAllInstructors } from '../store/instructor.selector';
 import { Instructor } from '../store/common.models';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-user-list',
@@ -36,6 +38,7 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
+    public dialog: MatDialog,
     private router: Router,
     private store: Store<{ instructor: Instructor[] }>
   ) {
@@ -78,5 +81,12 @@ export class UserListComponent implements OnInit {
   viewCourse(couseId: any) {
     console.log('id is', couseId);
     //this.router.navigate(['/course-page'])
+  }
+
+  openDialog(): void {
+    this.dialog.open(DeleteDialogComponent, {
+      width: '300px',
+      disableClose: true, // Prevent closing by clicking outside or pressing escape
+    });
   }
 }

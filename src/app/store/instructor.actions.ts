@@ -58,16 +58,48 @@ export const loadInstructorNameListFailure = createAction(
   props<{ error: any }>()
 );
 export const addCourse = createAction(
-  '[Course] Load Course',
+  '[Course] Add Course',
   props<{ course: Course }>()
 );
 
 export const addCourseSuccess = createAction(
-  '[Course] Load Course Success',
+  '[Course] Add Course Success',
   props<{ course: Course }>()
 );
 
 export const addCourseFailure = createAction(
-  '[Course] Load Course Failure',
+  '[Course] Add Course Failure',
+  props<{ error: any }>()
+);
+
+//Add Instructor action
+export const addInstructor = createAction(
+  '[Instructor] Add Instructor',
+  props<{ instructor: Instructor }>()
+);
+
+export const addInstructorSuccess = createAction(
+  '[Instructor] Add Instructor Success',
+  props<{ instructor: Instructor }>()
+);
+
+export const addInstructorFailure = createAction(
+  '[Instructor] Add Instructor Failure',
+  props<{ error: any }>()
+);
+
+//Add Instructor action
+export const addLesson = createAction(
+  '[Lesson] Add Lesson',
+  props<{ lesson: Lesson }>()
+);
+
+export const addLessonSuccess = createAction(
+  '[Lesson] Add Lesson Success',
+  props<{ lesson: Lesson }>()
+);
+
+export const addLessonFailure = createAction(
+  '[Lesson] Add Lesson Failure',
   props<{ error: any }>()
 );
