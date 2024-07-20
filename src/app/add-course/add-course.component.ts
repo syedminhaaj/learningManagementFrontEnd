@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { Instructor, selectDropdown } from '../store/common.models';
@@ -16,16 +16,20 @@ export class AddCourseComponent implements OnInit {
   form: FormGroup;
   options: any = [];
   instructors: any[] | undefined;
+  InstructorName: string | null | undefined;
+  assignedInstructorName: string | null | undefined;
+  instructorIdFromUserList: number | undefined;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private store: Store<{ instructor: Instructor[] }>
   ) {
     this.form = this.fb.group({
       courseName: ['', Validators.required],
       courseDuration: ['', Validators.required],
-      instructorId: ['', Validators.required],
+      instructorId: [''],
     });
   }
 
@@ -43,13 +47,21 @@ export class AddCourseComponent implements OnInit {
           label: item.name,
         }));
       });
-
-    console.log('options os', this.options);
+    this.route.queryParams.subscribe((params) => {
+      console.log('user', params);
+      this.assignedInstructorName = params['username'];
+      this.instructorIdFromUserList = params['userId'];
+    });
   }
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log('Form Submitted', this.form.value);
+      console.log('Form Submitted with values', this.form.value);
+      if (this.assignedInstructorName) {
+        this.form.patchValue({
+          instructorId: this.instructorIdFromUserList,
+        });
+      }
       this.store.dispatch(
         InstructorActions.addCourse({ course: this.form.value })
       );

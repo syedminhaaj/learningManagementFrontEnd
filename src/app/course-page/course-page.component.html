@@ -5,6 +5,7 @@
   color="primary"
   (click)="navigateToAddLesson()"
   [routerLink]="['/add-lesson', courseId]"
+  [queryParams]="{ courseName: course.courseName }"
 >
   Add New Lesson
 </button>

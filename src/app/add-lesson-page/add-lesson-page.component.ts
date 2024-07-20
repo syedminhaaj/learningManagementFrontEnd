@@ -11,6 +11,7 @@ import * as InstructorActions from '../store/instructor.actions';
 })
 export class AddLessonPageComponent implements OnInit {
   courseId: string | null | undefined;
+  courseName: string | undefined;
   lesson = {
     lessonText: '',
     lessonName: '',
@@ -24,6 +25,11 @@ export class AddLessonPageComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId');
+    this.route.queryParams.subscribe((params) => {
+      this.courseName = params['courseName'];
+
+      console.log('what is both', this.courseName);
+    });
   }
 
   onSubmit() {

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 
 import * as InstructorActions from '../store/instructor.actions';
 import { selectAllInstructors } from '../store/instructor.selector';
-import { Instructor } from '../store/common.models';
+import { Course, Instructor } from '../store/common.models';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
@@ -88,5 +88,10 @@ export class UserListComponent implements OnInit {
       width: '300px',
       disableClose: true, // Prevent closing by clicking outside or pressing escape
     });
+  }
+
+  navigateToCoursePage(username: any) {
+    console.log('course is', username);
+    this.router.navigate(['/add-course', username]);
   }
 }

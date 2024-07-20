@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'lesson-page/:lessonId', component: LessonPageComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'add-course', component: AddCourseComponent },
+  { path: 'add-course/:userId', component: AddCourseComponent },
   { path: 'add-lesson/:courseId', component: AddLessonPageComponent },
 ];
 

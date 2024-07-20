@@ -10,7 +10,7 @@
       <input matInput formControlName="courseDuration" />
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" *ngIf="!assignedInstructorName">
       <mat-label>Select Instructor Name</mat-label>
       <mat-select formControlName="instructorId">
         <mat-option *ngFor="let option of options" [value]="option.value">
@@ -18,7 +18,15 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
+    <mat-form-field appearance="fill" *ngIf="assignedInstructorName">
+      <mat-label>Instructor Name</mat-label>
+      <input
+        matInput
+        placeholder="instructor name"
+        [value]="assignedInstructorName"
+        readonly
+      />
+    </mat-form-field>
     <div class="btn">
       <button
         mat-raised-button
